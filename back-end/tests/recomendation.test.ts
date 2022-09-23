@@ -154,7 +154,31 @@ describe("remove point to score", () => {
 
 })
 
+describe("get recommendation by id", () => {
 
+    it("id not register it should return 404", async () => {
+
+        const result = await supertest(app).get("/recommendations/0")
+        
+        expect(result.status).toEqual(404);
+        
+    });
+
+    it("get rigth recommendation", async () => {
+
+        const recommendation = await recomendationFactory.createRecommendation()
+
+        const result = await supertest(app).get(`/recommendations/${recommendation.id}`)
+        
+        expect(result.status).toEqual(200);
+        expect(result.body).toBeInstanceOf(Object);
+        expect(result.body).toHaveProperty('name')
+        expect(result.body).toHaveProperty('youtubeLink')
+        expect(result.body).toHaveProperty('score')  
+    
+    });
+
+})
 
 
 afterAll(async () => {
