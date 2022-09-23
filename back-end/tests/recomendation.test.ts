@@ -10,7 +10,7 @@ beforeEach(async () => {
 
 // escrever um describe para cada rota;
 
-describe("Test create new Tests", () => {
+describe("create a new recommendation", () => {
 
     it("given a invalid body it should return 422", async () => {
       
@@ -57,6 +57,7 @@ describe("Test create new Tests", () => {
 
 describe("get all recommendations register", () => {
 
+
     it("get recommendations ", async () => {
 
         const body = await recomendationFactory.createBodyTest()
@@ -78,14 +79,81 @@ describe("get all recommendations register", () => {
 
 describe("Add point to score", () => {
 
-    it("get all recommendations register", async () => {
-
-        const result = await supertest(app).post("/recommendations/:id/upvote")
+    it("get an id no register", async () => {
+        
+        const result = await supertest(app).post("/recommendations/0/upvote")
+        expect(result.status).toEqual(404);
        
+    });
+    it("add one point to score", async () => {
+        const addRecomendation = await recomendationFactory.createRecommendation();
+
+        const score = addRecomendation.score;
+
+        const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/upvote`)
+        
+        const findRecommendation = await prisma.recommendation.findUnique({
+            where: { id: addRecomendation.id }
+        });
+
+        expect(result.status).toEqual(200);
+        expect(findRecommendation.score).toEqual(score + 1)
        
     });
 
 })
+
+describe("remove point to score", () => {
+
+    it("get an id no register", async () => {
+        
+        const result = await supertest(app).post("/recommendations/0/downvote")
+        expect(result.status).toEqual(404);
+       
+    });
+    it("remove one point to score", async () => {
+        const addRecomendation = await recomendationFactory.createRecommendation();
+
+        const score = addRecomendation.score;
+
+        const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/downvote`)
+        
+        const findRecommendation = await prisma.recommendation.findUnique({
+            where: { id: addRecomendation.id }
+        });
+
+        expect(result.status).toEqual(200);
+        expect(findRecommendation.score).toEqual(score - 1)
+       
+    });
+    it("remove one point to score and delete recommendation", async () => {
+        const addRecomendation = await recomendationFactory.createRecommendation();
+      
+        const changeScore = await prisma.recommendation.update({
+            where: {
+                id: addRecomendation.id
+            }, data: {
+                score: -5
+            }
+        })
+
+        const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/downvote`)
+
+        const find = await prisma.recommendation.findUnique({
+            where: {
+                id: addRecomendation.id
+            }
+        })
+    
+        const score = addRecomendation.score;
+
+        expect(result.status).toEqual(200);
+        expect(find).toBe(null)
+       
+    });
+
+})
+
 
 
 
