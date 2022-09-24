@@ -205,6 +205,19 @@ describe("get a random recommendation", () => {
 
 })
 
+describe("get recommendation order by amount", () => {
+
+    it("when no one single music was register", async () => {
+        const firstRecommendation = await recomendationFactory.createRecommendation()
+        const secondRecommendation = await recomendationFactory.createRecommendation()
+
+        const result = await supertest(app).get("/recommendations/top/2")
+        expect(result.status).toEqual(200);
+        expect(result.body).toBeInstanceOf(Array);
+        expect(result.body.length).toBe(2)
+       
+    });
+})
 
 afterAll(async () => {
     await prisma.$disconnect();
