@@ -62,12 +62,11 @@ describe('', () => {
       
         const promise = recommendationService.upvote(number)
           
-       /* expect(promise).rejects.toEqual({
+        expect(promise).rejects.toEqual({
           message: '',
           type: 'not_found'
-        }); */
+        }); 
         expect(recommendationRepository.find).toBeCalled();
-        expect(promise).rejects.toEqual(notFoundError);
         expect(recommendationRepository.updateScore).not.toBeCalled();
         
         });
@@ -93,6 +92,84 @@ describe('', () => {
         expect(recommendationRepository.updateScore).toBeCalled();
        
         });
+    
+    it('downvote: id not valid', async () => {
+        
+        const number = 0;
+      
+        jest.spyOn(recommendationRepository, "find")
+        .mockImplementationOnce((): any => {});
+        jest.spyOn(recommendationRepository, "updateScore")
+        .mockImplementationOnce((): any => {});
+        jest.spyOn(recommendationRepository, "remove")
+        .mockImplementationOnce((): any => {});
+      
+        const promise = recommendationService.downvote(number)
+          
+        expect(recommendationRepository.find).toBeCalled();
+        expect(promise).rejects.toEqual({
+          message: '',
+          type: 'not_found'
+        });
+        expect(recommendationRepository.updateScore).not.toBeCalled();
+        expect(recommendationRepository.remove).not.toBeCalled();
+        
+        });
+
+    it('downvote: remove point to score', async () => {
+        const number = 1;
+        
+        jest.spyOn(recommendationRepository, "find")
+        .mockResolvedValueOnce({
+          id:1, 
+          name: "link música favorita",
+          youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+          score: 0 
+          });
+        jest.spyOn(recommendationRepository, "updateScore")
+        .mockResolvedValueOnce({
+          id:1, 
+          name: "link música favorita",
+          youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+          score: -1 
+          });
+        jest.spyOn(recommendationRepository, "remove")
+        .mockImplementationOnce((): any => {});     
+        
+        const promise = await recommendationService.downvote(number)
+            
+        expect(recommendationRepository.find).toBeCalled();
+        expect(recommendationRepository.updateScore).toBeCalled();
+        expect(recommendationRepository.remove).not.toBeCalled();
+        });   
+  
+    it('downvote: remove point to score and delete recommendation', async () => {
+      const number = 1;
+          
+      jest.spyOn(recommendationRepository, "find")
+      .mockResolvedValueOnce({
+        id:1, 
+        name: "link música favorita",
+        youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+        score: -5 
+        });
+      jest.spyOn(recommendationRepository, "updateScore")
+      .mockResolvedValueOnce({
+        id:1, 
+        name: "link música favorita",
+        youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+        score: -6 
+        });
+      jest.spyOn(recommendationRepository, "remove")
+      .mockImplementationOnce((): any => {});
+      
+      const promise = await recommendationService.downvote(number)
+          
+      expect(recommendationRepository.find).toBeCalled();
+      expect(recommendationRepository.updateScore).toBeCalled();
+      expect(recommendationRepository.remove).toBeCalled();       
+      });    
+      
     
     
 
