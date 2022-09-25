@@ -22,3 +22,23 @@ export async function createRecommendation(){
         });
         return findRecommendation
 }
+
+export async function makeRecommendations(){
+    const recommendations = [
+            {
+            id:1, 
+            name: "link música favorita",
+            youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+            score: 20
+            },
+            {
+            id:2, 
+            name: "link segunda música favorita",
+            youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+            score: 10
+            }
+    ]
+    return recommendations
+        
+    
+}

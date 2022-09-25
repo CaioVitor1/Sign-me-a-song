@@ -66,11 +66,6 @@ describe("get all recommendations register", () => {
         
         expect(result.status).toEqual(200);
         expect(result.body).toBeInstanceOf(Array);
-        //depois ver se precisar verificar os elementos desse objeto
-        
-        //expect(array).toHaveProperty('{name}')
-        //expect(result.body).toHaveProperty('youtubeLink')
-        //expect(result.body).toHaveProperty('score')
     
     });
 

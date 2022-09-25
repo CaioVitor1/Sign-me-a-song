@@ -170,7 +170,29 @@ describe('', () => {
       expect(recommendationRepository.remove).toBeCalled();       
       });    
       
-    
+    it('get all recommendation', async () => {
+      jest.spyOn(recommendationRepository, "findAll")
+      .mockImplementationOnce((): any => []);
+
+      const promise = await recommendationService.get()
+
+      expect(promise).toBeInstanceOf(Array);
+      expect(recommendationRepository.findAll).toBeCalled()
+    })
+
+    it('get recommendations order by score', async () => {
+      const recommendations = await recomendationFactory.makeRecommendations()
+      const amount = recommendations.length
+
+      jest.spyOn(recommendationRepository, "getAmountByScore")
+      .mockImplementationOnce((): any => recommendations);
+
+      const promise = await recommendationService.getTop(amount)
+
+      expect(promise).toBeInstanceOf(Array);
+      expect(promise.length).toEqual(amount)
+      expect(recommendationRepository.getAmountByScore).toBeCalled()
+    })
     
 
 
