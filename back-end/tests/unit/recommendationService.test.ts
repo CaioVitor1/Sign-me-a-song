@@ -1,7 +1,8 @@
 import { jest } from '@jest/globals';
+import { type } from 'os';
 import {recommendationRepository} from "../../src/repositories/recommendationRepository"
 import {recommendationService} from "../../src/services/recommendationsService"
-import { conflictError } from '../../src/utils/errorUtils';
+import { conflictError, notFoundError } from '../../src/utils/errorUtils';
 import * as recomendationFactory from "../factory/recomendantionFactory"
 
 describe('', () => {
@@ -49,23 +50,51 @@ describe('', () => {
       
         });
     
-    it('upvote: create a new recommendation', async () => {
+    it('upvote: id not valid', async () => {
         
-        const recommendation = await recomendationFactory.createBodyTest()
+        const number = 0;
       
-        jest.spyOn(recommendationRepository, "findByName")
+        jest.spyOn(recommendationRepository, "find")
         .mockImplementationOnce((): any => {});
   
-        jest.spyOn(recommendationRepository, "create")
-        .mockImplementationOnce(async () => {});
+        jest.spyOn(recommendationRepository, "updateScore")
+        .mockImplementationOnce((): any => {});
       
-        await recommendationService.insert(recommendation);
-            
-        expect(recommendationRepository.findByName).toBeCalled();
-        expect(recommendationRepository.create).toBeCalled();
+        const promise = recommendationService.upvote(number)
+          
+       /* expect(promise).rejects.toEqual({
+          message: '',
+          type: 'not_found'
+        }); */
+        expect(recommendationRepository.find).toBeCalled();
+        expect(promise).rejects.toEqual(notFoundError);
+        expect(recommendationRepository.updateScore).not.toBeCalled();
         
         });
 
+    it('upvote: add new point to score', async () => {
+        
+        const number = 1;
+        
+        jest.spyOn(recommendationRepository, "find")
+        .mockResolvedValueOnce({
+          id:1, 
+          name: "link música favorita",
+          youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
+          score: 0 
+          });
+    
+        jest.spyOn(recommendationRepository, "updateScore")
+        .mockImplementationOnce((): any => {});
+          
+        const promise = await recommendationService.upvote(number)
+        
+        expect(recommendationRepository.find).toBeCalled();
+        expect(recommendationRepository.updateScore).toBeCalled();
+       
+        });
+    
+    
 
 
 
