@@ -194,6 +194,53 @@ describe('', () => {
       expect(recommendationRepository.getAmountByScore).toBeCalled()
     })
     
+    it('random: when no have recommendation: notFound Error', async() => {
+     
+      jest.spyOn(recommendationRepository, "findAll").mockResolvedValue([]);
+      
+      const promise = recommendationService.getRandom()
+
+      expect(promise).rejects.toEqual({
+        message: '',
+        type: 'not_found'
+      });
+      expect(recommendationRepository.findAll).toBeCalled()
+
+    })
+
+    it('random: get random recommendation when random is lte', async() => {
+      const recommendation = await recomendationFactory.makeRecommendations()
+
+      jest.spyOn(Math, "random").mockReturnValue(0.8);
+      jest.spyOn(recommendationRepository, "findAll")
+      .mockResolvedValueOnce(recommendation);
+
+      const promise = await recommendationService.getRandom()
+
+      expect(recommendationRepository.findAll).toBeCalled()
+      expect(promise).toBeInstanceOf(Object);
+      expect(promise).toHaveProperty('name')
+      expect(promise).toHaveProperty('youtubeLink')
+      expect(promise).toHaveProperty('score')  
+
+    })
+
+    it('random: get random recommendation when random is gt', async() => {
+      const recommendation = await recomendationFactory.makeRecommendations()
+
+      jest.spyOn(Math, "random").mockReturnValue(0.2);
+      jest.spyOn(recommendationRepository, "findAll")
+      .mockResolvedValueOnce(recommendation);
+      
+      const promise = await recommendationService.getRandom()
+
+      expect(recommendationRepository.findAll).toBeCalled()
+      expect(promise).toBeInstanceOf(Object);
+      expect(promise).toHaveProperty('name')
+      expect(promise).toHaveProperty('youtubeLink')
+      expect(promise).toHaveProperty('score')  
+
+    })
 
 
 

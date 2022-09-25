@@ -51,9 +51,20 @@ async function getTop(amount: number) {
 
 async function getRandom() {
   const random = Math.random();
+
+  console.log("random é: ")
+  console.log(random)
+
   const scoreFilter = getScoreFilter(random);
 
+  console.log("scoreFilter é: (acho que vai ser só lte ou gt)")
+  console.log(scoreFilter)
+
   const recommendations = await getByScore(scoreFilter);
+
+  console.log("recommendations após getByScore é: ")
+  console.log(recommendations)
+
   if (recommendations.length === 0) {
     throw notFoundError();
   }
