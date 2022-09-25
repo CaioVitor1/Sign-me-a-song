@@ -1,7 +1,7 @@
-import app from "../src/app"
+import app from "../../src/app"
 import supertest from 'supertest';
-import prisma from "../src/database"
-import * as recomendationFactory from "./factory/recomendantionFactory"
+import prisma from "../../src/database"
+import * as recomendationFactory from "../factory/recomendantionFactory"
 
 beforeEach(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE recommendations;`
