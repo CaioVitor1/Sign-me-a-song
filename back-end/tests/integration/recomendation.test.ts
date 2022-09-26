@@ -1,56 +1,57 @@
-import app from "../../src/app"
-import supertest from 'supertest';
-import prisma from "../../src/database"
-import * as recomendationFactory from "../factory/recomendantionFactory"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import app from "../../src/app";
+import supertest from "supertest";
+import prisma from "../../src/database";
+import * as recomendationFactory from "../factory/recomendantionFactory";
 
 beforeEach(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE recommendations;`
-  });
+	await prisma.$executeRaw`TRUNCATE TABLE recommendations;`;
+});
  
 
 // escrever um describe para cada rota;
 
 describe("create a new recommendation", () => {
 
-    it("given a invalid body it should return 422", async () => {
+	it("given a invalid body it should return 422", async () => {
       
         
-        const body = await recomendationFactory.createBodyTest()
+		const body = await recomendationFactory.createBodyTest();
 
-        const result = await supertest(app).post("/recommendations")
-        .send({
-            name: body.name
-        })
-        expect(result.status).toEqual(422);
-    });
+		const result = await supertest(app).post("/recommendations")
+			.send({
+				name: body.name
+			});
+		expect(result.status).toEqual(422);
+	});
 
-    it("create a new recommendation should return 201", async () => {
+	it("create a new recommendation should return 201", async () => {
       
-        const body = await recomendationFactory.createBodyTest()
+		const body = await recomendationFactory.createBodyTest();
 
-        const result = await supertest(app).post("/recommendations")
-        .send(body)
+		const result = await supertest(app).post("/recommendations")
+			.send(body);
 
-        const findRecommendation = await prisma.recommendation.findUnique({
-            where: { name: body.name }
-        });
+		const findRecommendation = await prisma.recommendation.findUnique({
+			where: { name: body.name }
+		});
 
-        expect(result.status).toEqual(201);
-        expect(findRecommendation).not.toBeNull();
-    });
+		expect(result.status).toEqual(201);
+		expect(findRecommendation).not.toBeNull();
+	});
 
-    it("given a name already register it should return 409", async () => {
+	it("given a name already register it should return 409", async () => {
       
-        const body = await recomendationFactory.createBodyTest()
+		const body = await recomendationFactory.createBodyTest();
 
-        const firstTry = await supertest(app).post("/recommendations")
-        .send(body)
-        const secondTry = await supertest(app).post("/recommendations")
-        .send(body)
+		const firstTry = await supertest(app).post("/recommendations")
+			.send(body);
+		const secondTry = await supertest(app).post("/recommendations")
+			.send(body);
 
-        expect(firstTry.status).toEqual(201);
-        expect(secondTry.status).toEqual(409);
-    });
+		expect(firstTry.status).toEqual(201);
+		expect(secondTry.status).toEqual(409);
+	});
 
 
 });
@@ -58,162 +59,167 @@ describe("create a new recommendation", () => {
 describe("get all recommendations register", () => {
 
 
-    it("get recommendations ", async () => {
+	it("get recommendations ", async () => {
 
-        const body = await recomendationFactory.createBodyTest()
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const body = await recomendationFactory.createBodyTest();
 
-        const result = await supertest(app).get("/recommendations")
+		const result = await supertest(app).get("/recommendations");
         
-        expect(result.status).toEqual(200);
-        expect(result.body).toBeInstanceOf(Array);
+		expect(result.status).toEqual(200);
+		expect(result.body).toBeInstanceOf(Array);
     
-    });
+	});
 
-})
+});
 
 
 describe("Add point to score", () => {
 
-    it("get an id no register", async () => {
+	it("get an id no register", async () => {
         
-        const result = await supertest(app).post("/recommendations/0/upvote")
-        expect(result.status).toEqual(404);
+		const result = await supertest(app).post("/recommendations/0/upvote");
+		expect(result.status).toEqual(404);
        
-    });
-    it("add one point to score", async () => {
-        const addRecomendation = await recomendationFactory.createRecommendation();
+	});
+	it("add one point to score", async () => {
+		const addRecomendation = await recomendationFactory.createRecommendation();
 
-        const score = addRecomendation.score;
+		const score = addRecomendation.score;
 
-        const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/upvote`)
+		const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/upvote`);
         
-        const findRecommendation = await prisma.recommendation.findUnique({
-            where: { id: addRecomendation.id }
-        });
+		const findRecommendation = await prisma.recommendation.findUnique({
+			where: { id: addRecomendation.id }
+		});
 
-        expect(result.status).toEqual(200);
-        expect(findRecommendation.score).toEqual(score + 1)
+		expect(result.status).toEqual(200);
+		expect(findRecommendation.score).toEqual(score + 1);
        
-    });
+	});
 
-})
+});
 
 describe("remove point to score", () => {
 
-    it("get an id no register", async () => {
+	it("get an id no register", async () => {
         
-        const result = await supertest(app).post("/recommendations/0/downvote")
-        expect(result.status).toEqual(404);
+		const result = await supertest(app).post("/recommendations/0/downvote");
+		expect(result.status).toEqual(404);
        
-    });
-    it("remove one point to score", async () => {
-        const addRecomendation = await recomendationFactory.createRecommendation();
+	});
+	it("remove one point to score", async () => {
+		const addRecomendation = await recomendationFactory.createRecommendation();
 
-        const score = addRecomendation.score;
+		const score = addRecomendation.score;
 
-        const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/downvote`)
+		const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/downvote`);
         
-        const findRecommendation = await prisma.recommendation.findUnique({
-            where: { id: addRecomendation.id }
-        });
+		const findRecommendation = await prisma.recommendation.findUnique({
+			where: { id: addRecomendation.id }
+		});
 
-        expect(result.status).toEqual(200);
-        expect(findRecommendation.score).toEqual(score - 1)
+		expect(result.status).toEqual(200);
+		expect(findRecommendation.score).toEqual(score - 1);
        
-    });
-    it("remove one point to score and delete recommendation", async () => {
-        const addRecomendation = await recomendationFactory.createRecommendation();
+	});
+	it("remove one point to score and delete recommendation", async () => {
+		const addRecomendation = await recomendationFactory.createRecommendation();
       
-        const changeScore = await prisma.recommendation.update({
-            where: {
-                id: addRecomendation.id
-            }, data: {
-                score: -5
-            }
-        })
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const changeScore = await prisma.recommendation.update({
+			where: {
+				id: addRecomendation.id
+			}, data: {
+				score: -5
+			}
+		});
 
-        const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/downvote`)
+		const result = await supertest(app).post(`/recommendations/${addRecomendation.id}/downvote`);
 
-        const find = await prisma.recommendation.findUnique({
-            where: {
-                id: addRecomendation.id
-            }
-        })
+		const find = await prisma.recommendation.findUnique({
+			where: {
+				id: addRecomendation.id
+			}
+		});
     
-        const score = addRecomendation.score;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const score = addRecomendation.score;
 
-        expect(result.status).toEqual(200);
-        expect(find).toBe(null)
+		expect(result.status).toEqual(200);
+		expect(find).toBe(null);
        
-    });
+	});
 
-})
+});
 
 describe("get recommendation by id", () => {
 
-    it("id not register it should return 404", async () => {
+	it("id not register it should return 404", async () => {
 
-        const result = await supertest(app).get("/recommendations/0")
+		const result = await supertest(app).get("/recommendations/0");
         
-        expect(result.status).toEqual(404);
+		expect(result.status).toEqual(404);
         
-    });
+	});
 
-    it("get rigth recommendation", async () => {
+	it("get rigth recommendation", async () => {
 
-        const recommendation = await recomendationFactory.createRecommendation()
+		const recommendation = await recomendationFactory.createRecommendation();
 
-        const result = await supertest(app).get(`/recommendations/${recommendation.id}`)
+		const result = await supertest(app).get(`/recommendations/${recommendation.id}`);
         
-        expect(result.status).toEqual(200);
-        expect(result.body).toBeInstanceOf(Object);
-        expect(result.body).toHaveProperty('name')
-        expect(result.body).toHaveProperty('youtubeLink')
-        expect(result.body).toHaveProperty('score')  
+		expect(result.status).toEqual(200);
+		expect(result.body).toBeInstanceOf(Object);
+		expect(result.body).toHaveProperty("name");
+		expect(result.body).toHaveProperty("youtubeLink");
+		expect(result.body).toHaveProperty("score");  
     
-    });
+	});
 
-})
+});
 
 describe("get a random recommendation", () => {
 
-    it("when no one single music was register", async () => {
+	it("when no one single music was register", async () => {
         
-        const result = await supertest(app).get("/recommendations/random")
-        expect(result.status).toEqual(404);
+		const result = await supertest(app).get("/recommendations/random");
+		expect(result.status).toEqual(404);
        
-    });
+	});
 
-    it("when no one single music was register", async () => {
+	it("when no one single music was register", async () => {
         
-        const recommendation = await recomendationFactory.createRecommendation()
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const recommendation = await recomendationFactory.createRecommendation();
 
-        const result = await supertest(app).get("/recommendations/random")
+		const result = await supertest(app).get("/recommendations/random");
 
-        expect(result.status).toEqual(200);
-        expect(result.body).toBeInstanceOf(Object);
-        expect(result.body).toHaveProperty('name')
-        expect(result.body).toHaveProperty('youtubeLink')
-        expect(result.body).toHaveProperty('score')  
-    });
+		expect(result.status).toEqual(200);
+		expect(result.body).toBeInstanceOf(Object);
+		expect(result.body).toHaveProperty("name");
+		expect(result.body).toHaveProperty("youtubeLink");
+		expect(result.body).toHaveProperty("score");  
+	});
     
 
-})
+});
 
 describe("get recommendation order by amount", () => {
 
-    it("when no one single music was register", async () => {
-        const firstRecommendation = await recomendationFactory.createRecommendation()
-        const secondRecommendation = await recomendationFactory.createRecommendation()
+	it("when no one single music was register", async () => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const firstRecommendation = await recomendationFactory.createRecommendation();
+		const secondRecommendation = await recomendationFactory.createRecommendation();
 
-        const result = await supertest(app).get("/recommendations/top/2")
-        expect(result.status).toEqual(200);
-        expect(result.body).toBeInstanceOf(Array);
-        expect(result.body.length).toBe(2)
+		const result = await supertest(app).get("/recommendations/top/2");
+		expect(result.status).toEqual(200);
+		expect(result.body).toBeInstanceOf(Array);
+		expect(result.body.length).toBe(2);
        
-    });
-})
+	});
+});
 
 afterAll(async () => {
-    await prisma.$disconnect();
+	await prisma.$disconnect();
 });

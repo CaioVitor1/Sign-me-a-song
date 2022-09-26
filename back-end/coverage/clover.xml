@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664078545580" clover="3.2.0">
-  <project timestamp="1664078545581" name="All files">
-    <metrics statements="141" coveredstatements="93" conditionals="29" coveredconditionals="12" methods="34" coveredmethods="13" elements="204" coveredelements="118" complexity="0" loc="141" ncloc="141" packages="9" files="10" classes="10"/>
+<coverage generated="1664209865849" clover="3.2.0">
+  <project timestamp="1664209865849" name="All files">
+    <metrics statements="159" coveredstatements="107" conditionals="30" coveredconditionals="12" methods="37" coveredmethods="14" elements="226" coveredelements="133" complexity="0" loc="159" ncloc="159" packages="9" files="14" classes="14"/>
     <package name="src">
-      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="18" coveredstatements="17" conditionals="1" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/app.ts">
-        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="14" coveredstatements="13" conditionals="1" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
       </file>
       <file name="database.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/database.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -27,7 +30,14 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="25" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <metrics statements="29" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <file name="e2eController.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/controllers/e2eController.ts">
+        <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+      </file>
       <file name="recommendationController.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/controllers/recommendationController.ts">
         <metrics statements="25" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
@@ -63,14 +73,20 @@
         <metrics statements="6" coveredstatements="2" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.repositories">
-      <metrics statements="13" coveredstatements="2" conditionals="1" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <metrics statements="16" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="9" coveredmethods="0"/>
+      <file name="e2eRepository.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/repositories/e2eRepository.ts">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
       <file name="recommendationRepository.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/repositories/recommendationRepository.ts">
         <metrics statements="13" coveredstatements="2" conditionals="1" coveredconditionals="0" methods="8" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
@@ -89,7 +105,15 @@
       </file>
     </package>
     <package name="src.routers">
-      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="e2eRouter.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/routers/e2eRouter.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
       <file name="recommendationRouter.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/routers/recommendationRouter.ts">
         <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -110,12 +134,18 @@
       <file name="recommendationsSchemas.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/schemas/recommendationsSchemas.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="38" coveredstatements="38" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
+      <metrics statements="41" coveredstatements="41" conditionals="6" coveredconditionals="6" methods="10" coveredmethods="10"/>
+      <file name="e2eService.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/services/e2eService.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
       <file name="recommendationsService.ts" path="/home/sony/Documentos/Driven/Módulos/Arquitetura/Módulo 5/Projetos/projeto21-singmeasong/back-end/src/services/recommendationsService.ts">
         <metrics statements="38" coveredstatements="38" conditionals="6" coveredconditionals="6" methods="9" coveredmethods="9"/>
         <line num="2" count="1" type="stmt"/>
@@ -192,12 +222,12 @@
         <line num="7" count="2" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="41" count="3" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
       </file>
     </package>
   </project>

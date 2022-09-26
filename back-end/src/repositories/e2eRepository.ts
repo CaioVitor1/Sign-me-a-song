@@ -1,5 +1,9 @@
-import  prisma from '../database.js';
+import  prisma from "../database.js";
 
-export async function truncate() {
-  await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
+async function truncate() {
+	await prisma.$executeRaw`TRUNCATE TABLE recommendations RESTART IDENTITY`;
 }
+
+export const e2eRepository = {
+	truncate
+};

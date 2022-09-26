@@ -201,65 +201,65 @@ import { recommendationService } from "../services/recommendationsService.js";
 import { wrongSchemaError } from "../utils/errorUtils.js";
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >insert(</span>req: Request, res: Response) {
-  const validation = <span class="cstat-no" title="statement not covered" >recommendationSchema.validate(req.body);</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (validation.error) {</span>
-<span class="cstat-no" title="statement not covered" >    throw wrongSchemaError();</span>
-  }
+	const validation = <span class="cstat-no" title="statement not covered" >recommendationSchema.validate(req.body);</span>
+<span class="cstat-no" title="statement not covered" >	<span class="missing-if-branch" title="if path not taken" >I</span>if (validation.error) {</span>
+<span class="cstat-no" title="statement not covered" >		throw wrongSchemaError();</span>
+	}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  await recommendationService.insert(req.body);</span>
+<span class="cstat-no" title="statement not covered" >	await recommendationService.insert(req.body);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.sendStatus(201);</span>
+<span class="cstat-no" title="statement not covered" >	res.sendStatus(201);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >upvote(</span>req: Request, res: Response) {
-  const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+	const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  await recommendationService.upvote(+id);</span>
+<span class="cstat-no" title="statement not covered" >	await recommendationService.upvote(+id);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.sendStatus(200);</span>
+<span class="cstat-no" title="statement not covered" >	res.sendStatus(200);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >downvote(</span>req: Request, res: Response) {
-  const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+	const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  await recommendationService.downvote(+id);</span>
+<span class="cstat-no" title="statement not covered" >	await recommendationService.downvote(+id);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.sendStatus(200);</span>
+<span class="cstat-no" title="statement not covered" >	res.sendStatus(200);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >random(</span>req: Request, res: Response) {
-  const randomRecommendation = <span class="cstat-no" title="statement not covered" >await recommendationService.getRandom();</span>
+	const randomRecommendation = <span class="cstat-no" title="statement not covered" >await recommendationService.getRandom();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  res.send(randomRecommendation);</span>
+<span class="cstat-no" title="statement not covered" >	res.send(randomRecommendation);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >get(</span>req: Request, res: Response) {
-  const recommendations = <span class="cstat-no" title="statement not covered" >await recommendationService.get();</span>
-<span class="cstat-no" title="statement not covered" >  res.send(recommendations);</span>
+	const recommendations = <span class="cstat-no" title="statement not covered" >await recommendationService.get();</span>
+<span class="cstat-no" title="statement not covered" >	res.send(recommendations);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >getTop(</span>req: Request, res: Response) {
-  const { amount } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+	const { amount } = <span class="cstat-no" title="statement not covered" >req.params;</span>
 &nbsp;
-  const recommendations = <span class="cstat-no" title="statement not covered" >await recommendationService.getTop(+amount);</span>
-<span class="cstat-no" title="statement not covered" >  res.send(recommendations);</span>
+	const recommendations = <span class="cstat-no" title="statement not covered" >await recommendationService.getTop(+amount);</span>
+<span class="cstat-no" title="statement not covered" >	res.send(recommendations);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >getById(</span>req: Request, res: Response) {
-  const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+	const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
 &nbsp;
-  const recommendation = <span class="cstat-no" title="statement not covered" >await recommendationService.getById(+id);</span>
-<span class="cstat-no" title="statement not covered" >  res.send(recommendation);</span>
+	const recommendation = <span class="cstat-no" title="statement not covered" >await recommendationService.getById(+id);</span>
+<span class="cstat-no" title="statement not covered" >	res.send(recommendation);</span>
 }
 &nbsp;
 export const recommendationController = {
-  insert,
-  upvote,
-  downvote,
-  random,
-  getTop,
-  get,
-  getById,
+	insert,
+	upvote,
+	downvote,
+	random,
+	getTop,
+	get,
+	getById,
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -268,7 +268,7 @@ export const recommendationController = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Sep 25 2022 01:02:25 GMT-0300 (Horário Padrão de Brasília)
+                at Mon Sep 26 2022 13:31:05 GMT-0300 (Horário Padrão de Brasília)
             </div>
         <script src="../../prettify.js"></script>
         <script>
