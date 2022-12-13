@@ -4,10 +4,15 @@
 
 # Tabela de Conteúdos
 
+* [Objetivo](#objetivo)
 * [Sobre](#sobre)
 * [Testes Automatizados](#testes)
 * [Tecnologias](#tecnologias)
 * [Rodando a aplicação](#run)
+
+# Objetivo
+
+<h3> Neste projeto recebi um front-end e back-end completamente implementados e fui responsável pela implementação de <b>todos os testes do projeto! </b></h3>
 
 # Sobre
 <h3> Já pediu para alguém alguma recomendação de música? Chegou a hora de transformar isso em código. Nessa semana, você vai construir a rede Sing me a Song. Ou melhor, os testes desta rede!
@@ -20,13 +25,18 @@ Sing me a song é uma aplicação para recomendação anônima de músicas. Quan
 <details>
 <summary><font size="4">Testes de integração: npm test </font></summary> 
         <h2>Aqui foi feito 27 testes que integravam todas as funcionalidades do back-end do projeto, desde o router, passando por controllers, services e repository.</h2>
+        <p align="center">
+                <img height="600" width="1000" src="./integrationTests.gif"> <br>
+        </p>
         
 </details>
 
 <details>
 <summary><font size="4">Testes unitários: npm run test:unit </font></summary> 
         <h2>Aqui foi realizado testes de todas as camada do Services com 100% de coverage.</h2>
-        
+         <p align="center">
+                <img height="600" width="1000" src="./unitTests.gif"> <br>
+        </p>
 </details>
 <details>
 
@@ -36,7 +46,9 @@ Sing me a song é uma aplicação para recomendação anônima de músicas. Quan
         - aumentar e diminuir score;<br>
         - Deletar recomendação quando o score estiver abaixo de -5
         </h2>
-        
+         <p align="center">
+                <img height="600" width="1000" src="./singMeaSong_Cypess.gif"> <br>
+        </p>
 </details>
 
 
