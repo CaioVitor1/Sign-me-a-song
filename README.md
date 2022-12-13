@@ -114,6 +114,9 @@ npm start
 
 Inicializando o cypress para testes de ponta a ponta:
 
+- Primeiro inicie o Front-End e o Back-End;
+- Em seguida execute:
+
 ```bash
 npx cypress open
 ```
