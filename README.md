@@ -15,7 +15,7 @@
 <h3> Neste projeto recebi um front-end e back-end completamente implementados e fui responsável pela implementação de <b>todos os testes do projeto! </b></h3>
 
 # Sobre
-<h3> Já pediu para alguém alguma recomendação de música? Chegou a hora de transformar isso em código. Nessa semana, você vai construir a rede Sing me a Song. Ou melhor, os testes desta rede!
+<h3> Já pediu para alguém alguma recomendação de música? Chegou a hora de transformar isso em código. Nesse projeto construi a rede Sing me a Song. Ou melhor, os testes desta rede!
 
 Sing me a song é uma aplicação para recomendação anônima de músicas. Quanto mais as pessoas curtirem uma recomendação, maior a chance dela ser recomendada para outras pessoas 🙂</h3>
   <br>
